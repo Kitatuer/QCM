@@ -238,15 +238,19 @@ function expandSharedQuiz(data) {
     title: data.t,
     description: data.d,
     passScore: data.p,
-    questions: Array.isArray(data.q) ? data.q.map((question) => ({
-      text: question.t,
-      type: question.y ? "multiple" : "single",
-      explanation: question.e,
-      choices: Array.isArray(question.c) ? question.c.map((choice) => ({
-        text: choice[0],
-        correct: Boolean(choice[1])
-      })) : []
-    })) : []
+    questions: Array.isArray(data.q)
+      ? data.q.map((question) => ({
+          text: question.t,
+          type: question.y ? "multiple" : "single",
+          explanation: question.e,
+          choices: Array.isArray(question.c)
+            ? question.c.map((choice) => ({
+                text: choice.text,
+                correct: Boolean(choice.correct)
+              }))
+            : []
+        }))
+      : []
   };
 }
 
@@ -739,6 +743,7 @@ function createLegacyQuizLink() {
 
 function createQuizSharePayload() {
   if (!quiz.id) quiz.id = crypto.randomUUID();
+
   const payload = {
     v: 2,
     i: quiz.id,
@@ -749,9 +754,13 @@ function createQuizSharePayload() {
       t: question.text,
       y: question.type === "multiple" ? 1 : 0,
       e: question.explanation,
-      c: question.choices.map((choice) => [choice.text, choice.correct ? 1 : 0])
+      c: question.choices.map((choice) => ({
+        text: choice.text,
+        correct: choice.correct ? 1 : 0
+      }))
     }))
   };
+
   return payload;
 }
 
