@@ -1,4 +1,4 @@
-[README.md](https://github.com/user-attachments/files/29437244/README.md)
+[README.md](https://github.com/user-attachments/files/29437529/README.md)
 # QCM Studio
 
 Application web autonome pour créer, passer, corriger et partager des QCM.
@@ -24,6 +24,7 @@ Fonctions disponibles :
 - activation/desactivation des QCM depuis le panneau admin.
 - chronometre par participant, enregistre avec le resultat pour departager les ex aequo.
 - sessions de QCM séparées avec classement filtrable par score puis par temps.
+- identification des participants par nom libre, liste imposée, ou combinaison des deux.
 
 ## Lien en ligne
 
